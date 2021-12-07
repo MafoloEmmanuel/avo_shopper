@@ -1,10 +1,37 @@
 body {
 	background-color: lightseagreen;
-	color: whitesmoke;
+	color: black;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container{
-	margin: auto;
+	margin: auto ;
 	width: 80%;
+}
+.topFive{
+	display: flex;
+}
+ul{
+	list-style: none;
+}
+li{
+	font-size: larger;
+	font: bolder;
+	color: black;
+}
+.titleFive{
+	text-align: center;
+	background-color: white;
+	color: black;
+}
+.format{
+	background-color: white;
+	padding: 5px;
+}
+.allShops,ul{
+	list-style:circle;
+}
+.pictures{
+	display: flex;
+	padding: 5px;
 }
