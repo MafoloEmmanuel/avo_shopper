@@ -14,8 +14,8 @@ if (process.env.DATABASE_URL && !local) {
 const connectionString = process.env.DATABASE_URL || 'postgresql://emmanuel:201735469@localhost:5432/coderdb';
 
 const pool = new Pool({
-    connectionString,
-    useSSL
+    connectionString: connectionString,
+  ssl:  useSSL
 });
 
 const avoShopper = AvoShopper(pool);
