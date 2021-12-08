@@ -33,57 +33,77 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
-app.get('/', async function (req, res) {
+app.get('/', async function (req,res,next) {
+   try{
     await avoShopper.topFiveDeals()
     res.render('index', {
         topFive: await avoShopper.topFiveDeals(),
     
     });
-    console.log('five')
+   } catch(err){
+next(err)
+   }
 });
-app.post('/topFive', async(req,res)=>{
+app.post('/topFive', async(req,res,next)=>{
+  try{
     await avoShopper.topFiveDeals()
     res.render('index', {
         topFive: await avoShopper.topFiveDeals(),
     
     });
+  } catch(err){
+next(err)
+  }
 })
 app.get('/newShop', async (req, res) => {
     res.render('newShop')
 })
-app.post('/createShop', async (req, res) => {
+app.post('/createShop', async (req, res,next) => {
+   try{
     var shop = req.body.shop;
     await avoShopper.createShop(shop);
     console.log(shop)
     res.render('newShop')
+   } catch(err){
+       next(err)}
 })
 app.get('/seeDeals', async (req, res) => {
     res.render('deals')
 });
-app.post('/createDeal', async (req, res) => {
-    var shop = req.body.shop;
-    var price = req.body.price;
-    var qty = req.body.qty;
-    console.log(price)
-    console.log(qty)
-    console.log(shop)
-
-
-    var getId = await avoShopper.createShop(shop)
-    var createDeal = await avoShopper.createDeal(getId, qty, price);
-
-    res.render('deals', { createDeal
-
+app.post('/createDeal', async (req, res,next) => {
+    try{
+        var shop = req.body.shop;
+        var price = req.body.price;
+        var qty = req.body.qty;
+        console.log(price)
+        console.log(qty)
+        console.log(shop)
+    
+    
+        var getId = await avoShopper.createShop(shop)
+        var createDeal = await avoShopper.createDeal(getId, qty, price);
+    
+        res.render('deals', { createDeal
+    
     })
+}catch(err){
+next(err)
+}
+    
 })
 
-app.get('/listshops', async (req, res) => {
+app.get('/listshops', async (req, res,next) => {
+  try{
     res.render('shops', {
         listshops: await avoShopper.listShops()
     })
+  }  catch(err){
+next(err)
+  }
 })
 
-app.get('/dealsForShop/:shopName', async (req, res) => {
+app.get('/dealsForShop/:shopName', async (req, res,next) => {
+  try{
     const shopName = req.params.shopName;
     var shopId = await avoShopper.get
     var shopDeals = await avoShopper.dealsForShop(shopName);
@@ -91,15 +111,22 @@ app.get('/dealsForShop/:shopName', async (req, res) => {
         shopName,
         shopDeals
     })
+  }  catch(err){
+      next(err)
+  }
 
 });
 
-app.post('/recommended', async(req,res)=>{
+app.post('/recommended', async(req,res,next)=>{
+  try{
     var amount  =req.body.amount;
-  var recommendDeals =  await avoShopper.recommendDeals(amount);
-res.render('index', {
-    recommendDeals
-})
+    var recommendDeals =  await avoShopper.recommendDeals(amount);
+  res.render('index', {
+      recommendDeals
+  })
+  } catch(err){
+      next(err)
+  } 
 })
 // start  the server and start listening for HTTP request on the PORT number specified...
 const PORT = process.env.PORT || 3019;
