@@ -72,7 +72,7 @@ app.post('/createDeal', async (req, res) => {
     var getId = await avoShopper.createShop(shop)
     var createDeal = await avoShopper.createDeal(getId, qty, price);
 
-    res.render('deals', {
+    res.render('deals', { createDeal
 
     })
 })
