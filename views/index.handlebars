@@ -5,66 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avo Shopper</title>
-
+    <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-
-        <div class="buttons">
-            <form action="/seeDeals" method="get">
-                <button type="submit">Avo deals</button>
-
-            </form>
-            <form action="/listshops" method="get">
-                <button type="submit"> Shops</button>
-
-            </form>
+        
+        <div>
+            <form action="/seeDeals" method="get"> <button type="submit">Avo Deals</button></form>
+            <form action="/listshops" method="get"><button type="submit">Available Shops</button></form>
         </div>
-        <form action="/topFive" method="post">
-            <div class=" titleFive">
-                <h2 class="">Top five avo deals</h2>
+        <div>
 
-            </div>
-            <div class="pictures">
-                <div>
-                    <img src="/img/avo.jpg" alt="">
+            <h3>Top Five Amazing Deals</h3>
+            <form action="/topFive" method="post"> <button type="submit">View top five deals</button></form>
+            {{#each topFive}}
 
-                </div>
-                <div>
-                    <img src="/img/avo.jpg" alt="">
+            <ul>
+                <li style="font-weight: bolder;">{{this.shop_name}}</li>
+                <p class="format"> {{this.qty}} for R{{this.price}}</p>
 
-                </div> <div>
-                    <img src="/img/avo.jpg" alt="">
+            </ul>
+            {{/each}}
 
-                </div>
-                
-            </div>
-            <div class="topFive">
-
-                {{#each topFive}}
-
-                <ul>
-                    <li  >{{this.shop_name}}</li>
-                    <p class="format"> {{this.qty}} for R{{this.price}}</p>
-
-                </ul>
-
-                {{/each}}
-            </div>
-            <button type="submit">Top five deals</button>
-        </form>
+        </div>
         <form action="/recommended" method="post">
             <div>
                 <h2>Recommended deals</h2>
+                <div class="errorMessage">{{messages.info}}</div>
                 <label for="">Please enter the amount you have</label>
                 <input type="text" value="{{amount}}" name="amount" id="">
                 <button type="submit">Submit</button>
                 <div class="topFive">
                     {{#each recommendDeals}}
+
                     <ul>
-                        <li style="background-color: white;">{{this.name}}</li>
+                        <li style="font-weight: bolder;">{{this.name}}</li>
                         <p>Price: R{{this.price}}</p>
                         <p>Quantity: {{this.qty}}</p>
                         <p>Unit_price: R{{this.unit_price}}</p>
@@ -75,12 +51,7 @@
 
             </div>
         </form>
-
-
-
     </div>
-
-
 </body>
 
 </html>

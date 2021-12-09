@@ -19,8 +19,19 @@ const pool = new Pool({
 });
 
 const avoShopper = AvoShopper(pool);
+const AvoShopperRoutes = require('./routes/avo-shooper-routes')
+const avoRoutes = AvoShopperRoutes(avoShopper)
 
+const flash = require('express-flash')
+const session = require('express-session');
+app.use(session({
+    secret: "<This is the string used for my sessions  >",
+    resave: false,
+    saveUninitialized: true
+}));
 
+//initialize the flash middleware
+app.use(flash());
 // enable the req.body object - to allow us to use HTML forms
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,101 +44,16 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
-app.get('/', async function (req,res,next) {
-   try{
-    await avoShopper.topFiveDeals()
-    res.render('index', {
-        topFive: await avoShopper.topFiveDeals(),
-    
-    });
-   } catch(err){
-next(err)
-   }
-});
-app.post('/topFive', async(req,res,next)=>{
-  try{
-    await avoShopper.topFiveDeals()
-    res.render('index', {
-        topFive: await avoShopper.topFiveDeals(),
-    
-    });
-  } catch(err){
-next(err)
-  }
-})
-app.get('/newShop', async (req, res) => {
-    res.render('newShop')
-})
-app.post('/createShop', async (req, res,next) => {
-   try{
-    var shop = req.body.shop;
-    await avoShopper.createShop(shop);
-    console.log(shop)
-    res.render('newShop')
-   } catch(err){
-       next(err)}
-})
-app.get('/seeDeals', async (req, res) => {
-    res.render('deals')
-});
-app.post('/createDeal', async (req, res,next) => {
-    try{
-        var shop = req.body.shop;
-        var price = req.body.price;
-        var qty = req.body.qty;
-        console.log(price)
-        console.log(qty)
-        console.log(shop)
-    
-    
-        var getId = await avoShopper.createShop(shop)
-        var createDeal = await avoShopper.createDeal(getId, qty, price);
-    
-        res.render('deals', { createDeal
-    
-    })
-}catch(err){
-next(err)
-}
-    
-})
+app.get('/', avoRoutes.home);
+app.post('/topFive', avoRoutes.topFive);
+app.post('/recommended',  avoRoutes.recommendDeals);
+app.get('/seeDeals', avoRoutes.deals);
+app.post('/createDeal', avoRoutes.createDeal);
+app.get('/listshops', avoRoutes.listShops)
+app.post('/createShop', avoRoutes.createShop);
+app.get('/dealsForShop/:shopName', avoRoutes.dealsForShop)
+app.get('/newShop', avoRoutes.newShop)
 
-app.get('/listshops', async (req, res,next) => {
-  try{
-    res.render('shops', {
-        listshops: await avoShopper.listShops()
-    })
-  }  catch(err){
-next(err)
-  }
-})
-
-app.get('/dealsForShop/:shopName', async (req, res,next) => {
-  try{
-    const shopName = req.params.shopName;
-    var shopId = await avoShopper.get
-    var shopDeals = await avoShopper.dealsForShop(shopName);
-    res.render('dealsForShop', {
-        shopName,
-        shopDeals
-    })
-  }  catch(err){
-      next(err)
-  }
-
-});
-
-app.post('/recommended', async(req,res,next)=>{
-  try{
-    var amount  =req.body.amount;
-    var recommendDeals =  await avoShopper.recommendDeals(amount);
-  res.render('index', {
-      recommendDeals
-  })
-  } catch(err){
-      next(err)
-  } 
-})
 // start  the server and start listening for HTTP request on the PORT number specified...
 const PORT = process.env.PORT || 3019;
 

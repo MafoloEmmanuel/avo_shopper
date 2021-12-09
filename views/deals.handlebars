@@ -7,21 +7,18 @@
     <title>Avo shopper</title>
 </head>
 <body>
-    <div>
+    <div class="container">
+<div>
             <form action="createDeal" method="post">
 
         <div>
+                <div class="errorMessage">{{messages.info}}</div>
 
             <h2>Add avo deals for a shop</h3>
             <label for="">Select a shop</label>
             <select name="shop" id=""  >
-                <option value="{{shop}}"></option>
-                <option value="kali fruits">Kali fruits</option>
-                <option value="Fruit & Veg City">Fruit & Veg City</option>
-                <option value="Tsjekkers">Tsjekkers</option>
-                <option value="Shopryte">Shopryte</option>
-                <option value="Pick n Play">Pick n Play</option>
-                <option value="Fruit lovers">Fruit lovers</option>
+                <option value=""></option>
+             
             </select>
             <h4>Create a new deal with price and quantity</h4>
             <label for="">Price </label>
@@ -32,5 +29,7 @@
             </form>
         </div>
     </div>
+    </div>
+    
 </body>
 </html>
