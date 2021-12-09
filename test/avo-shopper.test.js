@@ -50,10 +50,7 @@ describe('The avo shopper', function () {
 		const shopId = await avoShopper.createShop('Veggie Tales');
 		await avoShopper.createDeal(shopId, 5, 28);
 
-        // assert.deepStrictEqual([], taxiTrips.findTaxisForRegion('Durban'));
-        // assert.deepStrictEqual([], taxiTrips.findTaxisForRegion('Cape Town'));
-        // assert.deepStrictEqual([], taxiTrips.findTaxisForRegion('Gauteng'));
-
+      
     })
 
     it('should return all the deals for a given shop', async function () {

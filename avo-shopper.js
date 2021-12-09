@@ -3,6 +3,7 @@ module.exports = function(pool) {
 	async function createShop(shopName) {
 
 		const result = await pool.query(`insert into shop (name) values ($1) returning id`, [shopName]);
+	//	console.log(result.rows)
 		if (result.rowCount === 1) {
 			return result.rows[0].id;
 		}
@@ -17,7 +18,7 @@ module.exports = function(pool) {
 	
 	async function dealsForShop(shopId) {
 		const result = await pool.query(`select * from avo_deal where shop_id = $1`, [shopId]);
-		//console.log(result.rows)
+	//	console.log(result.rows)
 		return result.rows;
 	}
 
@@ -36,6 +37,7 @@ module.exports = function(pool) {
 	async function createDeal(shopId, qty, price) {
 		await pool.query(`insert into avo_deal (shop_id, qty, price) values ($1, $2, $3)`, 
 			[shopId, qty, price]);
+			
 	}
 
 	async function recommendDeals(amount) {

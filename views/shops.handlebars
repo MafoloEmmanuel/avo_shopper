@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -20,11 +22,17 @@
                 <h4>All the available Shops</h4>
                 {{#each listshops}}
                 <ul class="allshops">
-                    <li> <a href="/dealsForShop/{{this.name}}">{{this.name}}</a> </li>
+                    <li> <a href="/dealsForShop/{{id}}">{{this.name}}</a> </li>
                 </ul>
                 {{/each}}
             </div>
+
         </div>
+        
+            <div>
+            <a href="/">Home</a>
+
+            </div>
     </div>
 
 </body>

@@ -22,37 +22,30 @@ module.exports = (avoShopper) => {
         }
     }
     let deals = async (req, res) => {
-        res.render('deals')
+        res.render('deals', {
+            listshops: await avoShopper.listShops()
+        })
     }
     let createDeal = async (req, res, next) => {
         try {
-            var shop = req.body.shop;
+            var shopId = req.body.shop;
             var price = req.body.price;
             var qty = req.body.qty;
+            if(shopId,qty,price){
+                console.log(shopId)
+                console.log(qty)
+                console.log(price)
+                await avoShopper.createDeal(shopId,qty,price)
+             
 
-            console.log(price)
-            console.log(qty)
-            console.log(shop)
-if(shop||price||qty){
-    var getId = await avoShopper.createShop(shop)
-    var createDeal = await avoShopper.createDeal(getId, qty, price);
-
-    res.render('deals', {
-        createDeal,
-
-    })
-
-}else if(!shop){
-    req.flash('info', "Please choose a shop!")
-    res.render('deals')
-} else if(!price){
-    req.flash('info', "Please enter a price!")
-    res.render('deals')
-}else if(!qty){
-    req.flash('info', "Please enter qty!")
-    res.render('deals')
-}
+                res.render('deals', {
+                    listshops: await avoShopper.listShops()
+     })
+            } else{
+req.flash('info', "No empty fields!")
+            }
         }
+
             catch (err) {
             next(err)
         }
@@ -60,12 +53,12 @@ if(shop||price||qty){
     let createShop = async (req, res, next) => {
         try {
 
-            var shop = req.body.shop;
-            if(shop){
-              var listshops=  await avoShopper.createShop(shop);
-                console.log(shop)
-                res.render('newShop',{
-                    listshops})
+            var shopName = req.body.shop;
+            if(shopName){
+              var createShop = await avoShopper.createShop(shopName)
+              res.render('newShop',{
+                    listshop: createShop
+                })
             } else{
                 req.flash('info', "Please enter shop name!")
                 req.flash('newShop');
@@ -87,11 +80,12 @@ if(shop||price||qty){
     }
     let dealsForShop = async (req, res, next) => {
         try {
-            const shopName = req.params.shopName;
-            var shopId = await avoShopper.createShop(shopId)
+            const shopId = req.params.id;
             var shopDeals = await avoShopper.dealsForShop(shopId);
+         //   var shopName = shopDeals[0].name
+         //   console.log(shopName)
             res.render('dealsForShop', {
-                shopName,
+//shopName,
                 shopDeals
             })
         } catch (err) {

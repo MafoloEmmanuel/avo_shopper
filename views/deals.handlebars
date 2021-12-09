@@ -16,9 +16,11 @@
 
             <h2>Add avo deals for a shop</h3>
             <label for="">Select a shop</label>
-            <select name="shop" id=""  >
-                <option value=""></option>
-             
+            <select name="shopName"  >
+                <option value="">choose a shop</option>
+                {{#each listshops}}
+                <option value="{{id}}">{{this.name}}</option>
+             {{/each}}
             </select>
             <h4>Create a new deal with price and quantity</h4>
             <label for="">Price </label>
@@ -27,6 +29,18 @@
             <input type="text" name="qty" value='{{qty}}' id="">
             <button type="submit">Save</button>
             </form>
+            <div>
+            <a href="/listshops"> View all the shops</a>
+                
+            </div>
+            <div>
+            <a href="/createShop"> Add a new shop</a>
+
+            </div>
+            <div>
+            <a href="/">Home</a>
+
+            </div>
         </div>
     </div>
     </div>

@@ -51,7 +51,7 @@ app.get('/seeDeals', avoRoutes.deals);
 app.post('/createDeal', avoRoutes.createDeal);
 app.get('/listshops', avoRoutes.listShops)
 app.post('/createShop', avoRoutes.createShop);
-app.get('/dealsForShop/:shopName', avoRoutes.dealsForShop)
+app.get('/dealsForShop/:id', avoRoutes.dealsForShop)
 app.get('/newShop', avoRoutes.newShop)
 
 // start  the server and start listening for HTTP request on the PORT number specified...
