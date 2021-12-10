@@ -39,7 +39,8 @@ module.exports = (avoShopper) => {
              
 
                 res.render('deals', {
-                    listshops: await avoShopper.listShops()
+                    listshops: await avoShopper.listShops(),
+                    seeDeals: await avoShopper.seeDeals()
      })
             } else{
 req.flash('info', "No empty fields!")

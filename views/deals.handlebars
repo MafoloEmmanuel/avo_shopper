@@ -33,14 +33,19 @@
             <a href="/listshops"> View all the shops</a>
                 
             </div>
-            <div>
-            <a href="/createShop"> Add a new shop</a>
-
-            </div>
+            
             <div>
             <a href="/">Home</a>
 
             </div>
+                {{#each seeDeals}}
+                <ul>
+                    <li>{{this.shop_name}}</li>
+                    <p>{{this.shopId}}</p>
+                    <p>{{this.qty}}</p>
+                    <p>{{this.price}}</p>
+                </ul>
+{{/each}}
         </div>
     </div>
     </div>

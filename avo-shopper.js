@@ -39,7 +39,10 @@ module.exports = function(pool) {
 			[shopId, qty, price]);
 			
 	}
-
+async function seeDeals (){
+ var result =await pool.query('select * from avo_deal')
+return result.rows
+}
 	async function recommendDeals(amount) {
 		const result = await pool.query(`
 			select name, price, qty, round((price/qty), 2) as unit_price from avo_deal 
@@ -50,6 +53,7 @@ module.exports = function(pool) {
 	}
 
 	return {
+		seeDeals,
 		createDeal,
 		createShop,
 		listShops,
