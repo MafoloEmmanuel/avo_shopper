@@ -9,6 +9,9 @@
 <body>
     <form action="/createShop" method="post">
     <div class="container">
+        <div class="errorMessage">{{messages.error}}</div>
+
+        <div class="success">{{messages.success}}</div>
 <label for="">Add a new shop</label>
 <input type="text" name="shop" value="{{shop}}">
 <button type="submit">Save</button>

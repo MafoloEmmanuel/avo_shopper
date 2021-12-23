@@ -19,6 +19,7 @@
 
             <h3>Top Five Amazing Deals</h3>
             <form action="/topFive" method="post"> <button type="submit">View top five deals</button></form>
+           <div class="deals">
             {{#each topFive}}
 
             <ul>
@@ -28,15 +29,16 @@
             </ul>
             {{/each}}
 
+</div>
         </div>
         <form action="/recommended" method="post">
             <div>
                 <h2>Recommended deals</h2>
-                <div class="errorMessage">{{messages.info}}</div>
+                <div class="errorMessage">{{messages.error}}</div>
                 <label for="">Please enter the amount you have</label>
                 <input type="text" value="{{amount}}" name="amount" id="">
                 <button type="submit">Submit</button>
-                <div class="topFive">
+                <div class="deals">
                     {{#each recommendDeals}}
 
                     <ul>

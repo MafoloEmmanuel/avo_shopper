@@ -40,7 +40,8 @@ module.exports = function(pool) {
 			
 	}
 async function seeDeals (){
- var result =await pool.query('select * from avo_deal')
+ var result =await pool.query(
+	 'select name,price,qty from avo_deal join shop on shop.id = avo_deal.shop_id ')
 return result.rows
 }
 	async function recommendDeals(amount) {

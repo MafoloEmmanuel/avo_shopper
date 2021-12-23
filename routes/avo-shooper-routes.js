@@ -31,19 +31,22 @@ module.exports = (avoShopper) => {
 
 
 
-            var shopName = req.body.name
             var shopId = req.body.shop
             var price = req.body.price;
             var qty = req.body.qty;
-            if(shopId,qty,price){
+             if(shopId,qty,price){
                 console.log(shopId)
                 console.log(qty)
                 console.log(price)
                 await avoShopper.createDeal(shopId,qty,price)
-             
+             req.flash('success', 'Deal created successfully')
 res.redirect('/seeDeals')
+            }else if(shopId== ''){
+                req.flash('error', "Select a shop!")
+                res.redirect('/seeDeals');
             } else{
-req.flash('info', "No empty fields!")
+req.flash('error', "Fill the empty fields!");
+res.redirect('/seeDeals');
             }
         }
             catch (err) {
@@ -53,15 +56,17 @@ req.flash('info', "No empty fields!")
     let createShop = async (req, res) => {
         try {
             var shopName = req.body.shop;
-            if(shopName){
+            if(!shopName){
+                req.flash('error', 'Enter shop name!')
+                res.render('newShop')
+            }
+            else{
               var createShop = await avoShopper.createShop(shopName)
+            req.flash('success', 'Shop created successfully')
               res.render('newShop',{
                     listshop: createShop
                 })
-            } else{
-                req.flash('info', "Please enter shop name!")
-                req.flash('newShop');
-            }
+            } 
            
         } catch (err) {
             console.log(err)
@@ -101,7 +106,7 @@ req.flash('info', "No empty fields!")
                     recommendDeals
                 })
             } else {
-                req.flash('info', "Enter an amount to get deals for!");
+                req.flash('error', "Enter an amount you have to get deals!");
                 res.render('index')
             }
 
@@ -113,6 +118,11 @@ req.flash('info', "No empty fields!")
         res.render('newShop')
 
     }
+    let allDeals = async(req,res)=>{
+     var allDeals =   await avoShopper.seeDeals();
+res.render('allDeals', {allDeals})
+console.log('************')
+    }
     return {
         home,
         topFive,
@@ -122,6 +132,7 @@ req.flash('info', "No empty fields!")
         listShops,
         dealsForShop,
         deals,
-        newShop
+        newShop,
+        allDeals
     }
 }

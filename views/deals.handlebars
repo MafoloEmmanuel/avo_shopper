@@ -9,12 +9,19 @@
 <body>
     <div class="container">
 <div>
+    <form action="/allDeals" method="get"> <button type="submit"> Available deals</button>
+   
+    </form>
             <form action="createDeal" method="post">
 
         <div>
-                <div class="errorMessage">{{messages.info}}</div>
+                <div class="errorMessage"><p>{{messages.error}}</p>
+                </div>
+                <div class="success">
+{{messages.success}}
+                </div>
 
-            <h2>Add avo deals for a shop</h3>
+            <h2>Add new avo deals for shops</h3>
             <label for="">Select a shop</label>
             <select name="shop"  >
                 <option value="">choose a shop</option>
@@ -38,14 +45,7 @@
             <a href="/">Home</a>
 
             </div>
-                {{#each seeDeals}}
-                <ul>
-                    <li>name: {{this.shop_name}}</li>
-                    <p>id: {{this.id}}</p>
-                    <p>qty: {{this.qty}}</p>
-                    <p>price: {{this.price}}</p>
-                </ul>
-{{/each}}
+         
         </div>
     </div>
     </div>
