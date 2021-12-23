@@ -16,7 +16,7 @@
 
             <h2>Add avo deals for a shop</h3>
             <label for="">Select a shop</label>
-            <select name="shopName"  >
+            <select name="shop"  >
                 <option value="">choose a shop</option>
                 {{#each listshops}}
                 <option value="{{id}}">{{this.name}}</option>
@@ -40,10 +40,10 @@
             </div>
                 {{#each seeDeals}}
                 <ul>
-                    <li>{{this.shop_name}}</li>
-                    <p>{{this.shopId}}</p>
-                    <p>{{this.qty}}</p>
-                    <p>{{this.price}}</p>
+                    <li>name: {{this.shop_name}}</li>
+                    <p>id: {{this.id}}</p>
+                    <p>qty: {{this.qty}}</p>
+                    <p>price: {{this.price}}</p>
                 </ul>
 {{/each}}
         </div>

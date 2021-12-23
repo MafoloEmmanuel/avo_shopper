@@ -1,5 +1,5 @@
 module.exports = (avoShopper) => {
-    let home = async (req, res, next) => {
+    let home = async (req, res) => {
         try {
             await avoShopper.topFiveDeals()
             res.render('index', {
@@ -7,10 +7,10 @@ module.exports = (avoShopper) => {
 
             });
         } catch (err) {
-            next(err)
+    (err)
         }
     }
-    let topFive = async (req, res, next) => {
+    let topFive = async (req, res) => {
         try {
             await avoShopper.topFiveDeals()
             res.render('index', {
@@ -18,7 +18,7 @@ module.exports = (avoShopper) => {
 
             });
         } catch (err) {
-            next(err)
+    (err)
         }
     }
     let deals = async (req, res) => {
@@ -26,9 +26,13 @@ module.exports = (avoShopper) => {
             listshops: await avoShopper.listShops()
         })
     }
-    let createDeal = async (req, res, next) => {
+    let createDeal = async (req, res) => {
         try {
-            var shopId = req.body.shop;
+
+
+
+            var shopName = req.body.name
+            var shopId = req.body.shop
             var price = req.body.price;
             var qty = req.body.qty;
             if(shopId,qty,price){
@@ -37,23 +41,17 @@ module.exports = (avoShopper) => {
                 console.log(price)
                 await avoShopper.createDeal(shopId,qty,price)
              
-
-                res.render('deals', {
-                    listshops: await avoShopper.listShops(),
-                    seeDeals: await avoShopper.seeDeals()
-     })
+res.redirect('/seeDeals')
             } else{
 req.flash('info', "No empty fields!")
             }
         }
-
             catch (err) {
-            next(err)
+            console.log(err)
         }
     }
-    let createShop = async (req, res, next) => {
+    let createShop = async (req, res) => {
         try {
-
             var shopName = req.body.shop;
             if(shopName){
               var createShop = await avoShopper.createShop(shopName)
@@ -66,34 +64,35 @@ req.flash('info', "No empty fields!")
             }
            
         } catch (err) {
-            next(err)
+            console.log(err)
+
         }
     }
 
-    let listShops = async (req, res, next) => {
+    let listShops = async (req, res) => {
         try {
             res.render('shops', {
                 listshops: await avoShopper.listShops()
             })
         } catch (err) {
-            next(err)
+            console.log(err)
         }
     }
-    let dealsForShop = async (req, res, next) => {
+    let dealsForShop = async (req, res) => {
         try {
             const shopId = req.params.id;
             var shopDeals = await avoShopper.dealsForShop(shopId);
-         //   var shopName = shopDeals[0].name
-         //   console.log(shopName)
+         var shopName = shopDeals[0].name
+         console.log(shopName)
             res.render('dealsForShop', {
-//shopName,
+                shopName,
                 shopDeals
             })
         } catch (err) {
-            next(err)
+            console.log(err)
         }
     }
-    let recommendDeals = async (req, res, next) => {
+    let recommendDeals = async (req, res) => {
         try {
             var amount = req.body.amount;
             if (amount) {
@@ -107,7 +106,7 @@ req.flash('info', "No empty fields!")
             }
 
         } catch (err) {
-            next(err)
+            console.log(err)
         }
     }
     let newShop = async (req, res) => {
