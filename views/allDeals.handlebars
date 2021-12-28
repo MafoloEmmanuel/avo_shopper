@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+<script src="client.js"></script>
 </head>
 <body>
     <div class="container">
-        <h4>All the available deals</h4>
-        <div class="deals">
+        <h4 style="text-align: center;">All the available deals</h4>
+        <div class="">
         {{#each allDeals}}
         <ul>
             <li style="font-weight:bolder;"> {{this.name}}</li>

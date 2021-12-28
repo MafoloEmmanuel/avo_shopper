@@ -5,17 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../public/style.css">
+    <style>
+        body{
+    background-color: #90e0ef;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: black;
+    text-align: center;
+
+        }
+        ul,p,h1,h3{
+            text-align: center;
+        }
+        ul{
+            list-style: none;
+font-weight: bolder;  
+color: rgb(223, 41, 41);          
+        }
+        
+    </style>
 </head>
 <body>
     <div class="container">
         <div>
     <h3>See deals for {{shopName}}</h3>
 
-<ul>
     {{#each shopDeals}}
-    <p> get {{this.qty}} for {{this.price}}</p>
-</ul>
+    <ul>
+        <li>Get {{this.qty}} for R{{this.price}}</li>
+    </ul>
 {{/each}}
         </div>
     </div>

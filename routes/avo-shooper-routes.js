@@ -87,12 +87,19 @@ res.redirect('/seeDeals');
         try {
             const shopId = req.params.id;
             var shopDeals = await avoShopper.dealsForShop(shopId);
-         var shopName = shopDeals[0].name
-         console.log(shopName)
-            res.render('dealsForShop', {
-                shopName,
-                shopDeals
-            })
+            var shopName = shopDeals[0].name
+        if(shopName){
+
+            console.log(shopName)
+               res.render('dealsForShop', {
+                   shopName,
+                   shopDeals
+               })
+        }
+           else{
+               req.flash('error', "No deals for this shop currently!");
+               res.render('shops')
+           } 
         } catch (err) {
             console.log(err)
         }

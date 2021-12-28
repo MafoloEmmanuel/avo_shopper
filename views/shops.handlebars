@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 	<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
+<script src="client.js"></script>
 </head>
 
 <body>
@@ -18,6 +20,7 @@
                     <button type="submit">Add new shop</button>
                 </form>
             </div>
+            <div>{{messages.error}}</div>
             <div class="">
                 <h4>All the available Shops</h4>
                 {{#each listshops}}

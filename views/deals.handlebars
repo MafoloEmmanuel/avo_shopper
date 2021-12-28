@@ -5,9 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avo shopper</title>
+    <link rel="stylesheet" href="style.css">
+
+<script src="client.js"></script>
 </head>
 <body>
     <div class="container">
+        <img src="/public/avo4.jpg">
 <div>
     <form action="/allDeals" method="get"> <button type="submit"> Available deals</button>
    
@@ -30,18 +34,19 @@
              {{/each}}
             </select>
             <h4>Create a new deal with price and quantity</h4>
-            <label for="">Price </label>
-            <input type="text" name="price" value='{{price}}' id="">
-            <label for="">Qty</label>
-            <input type="text" name="qty" value='{{qty}}' id="">
+            <div>       <label for="">Price </label>
+            <input type="text" name="price" value='{{price}}' size="10" id=""></div>
+     <div><label for="">Qty</label>
+            <input type="text" name="qty" value='{{qty}}' size="10" id=""></div>
+            
             <button type="submit">Save</button>
             </form>
-            <div>
+            <div style="padding: 10px;">
             <a href="/listshops"> View all the shops</a>
                 
             </div>
             
-            <div>
+            <div style="padding: 10px;">
             <a href="/">Home</a>
 
             </div>
