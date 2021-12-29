@@ -1,4 +1,5 @@
 # Avo shopper
+The app is found on Heroku at https://the-avo-shopper.herokuapp.com/
 
 It’s avocado season and there are special offers everywhere. Help your friends to keep track of finding the cheapest avos by creating a little web app using the supplied Factory Function in `avo-shopper.js`.
 
