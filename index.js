@@ -38,6 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // enable the static folder...
 app.use(express.static('public'));
+app.use(express.static('images'));
 
 // add more middleware to allow for templating support
 
