@@ -45,6 +45,10 @@ ul{
 .deals{
     display: flex;
 }
+.recommend{
+    display: block;
+    text-align: center;
+}
 img{
     width: 10%;
 }
