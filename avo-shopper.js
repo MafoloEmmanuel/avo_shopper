@@ -5,6 +5,7 @@ module.exports = function(pool) {
 		const result = await pool.query(`insert into shop (name) values ($1) returning id`, [shopName]);
 	//	console.log(result.rows)
 		if (result.rowCount === 1) {
+			console.log(result.rows[0].id)
 			return result.rows[0].id;
 		}
 		return null;
